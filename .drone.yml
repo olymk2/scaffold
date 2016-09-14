@@ -1,0 +1,19 @@
+build:
+  image: olymk2/stomatopod
+  commands:
+    - nose2
+
+compose:
+    mariadb:
+      container_name: database
+      image: mariadb
+      network_mode: bridge
+      ports:
+          - "3300:3306"
+      environment:
+          MYSQL_BULK: test_runner|test_runner|test_runner|test_runner
+          MYSQL_ROOT_PASSWORD: test_runner
+      volumes:
+          - ./site/sql/setup/:/docker-entrypoint-initdb.d
+      restart: unless-stopped
+

@@ -1,0 +1,122 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+<channel>
+<title>Oliver Marks` Blog</title>
+<link>http://www.digitaloctave.com</link>
+<description>Personal Blog of Oliver Marks</description>
+<item>
+<title>Review of "Effective Python"</title>
+<link>
+http://digitaloctave.co.uk/pages/reviews/effectivepython.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/reviews/effectivepython.htm
+</guid>
+<description>Short review of "Effective Python"</description>
+<pubDate>Tue, 18 Aug 2015 23:00:00 -0000</pubDate>
+<category>review</category>
+<category>books</category>
+<category>python</category>
+<media:thumbnail url="http://digitaloctave.co.uk//static/images/thumbs/effectivepython.jpg"/>
+</item>
+<item>
+<title>
+Class for generating a grid to position and size windows
+</title>
+<link>
+http://digitaloctave.co.uk/pages/desktop_enviroment/grid_layout.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/desktop_enviroment/grid_layout.htm
+</guid>
+<description>
+This is a helper class to split an area up into increasingly smaller areas.
+</description>
+<pubDate>Mon, 31 Aug 2015 23:00:00 -0000</pubDate>
+<category>xcb</category>
+<category>python</category>
+<category>util</category>
+<media:thumbnail url="http://digitaloctave.co.uk/static/images/x/xcb_window_list.png"/>
+</item>
+<item>
+<title>XCB loading and displaying images</title>
+<link>
+http://digitaloctave.co.uk/pages/desktop_enviroment/png_image_loader.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/desktop_enviroment/png_image_loader.htm
+</guid>
+<description>
+Helper class which will load in a png and convert it ready for display in a X window.
+</description>
+<pubDate>Mon, 24 Aug 2015 23:00:00 -0000</pubDate>
+<category>xcb</category>
+<category>python</category>
+<category>util</category>
+<media:thumbnail url="http://digitaloctave.co.uk/static/images/x/xcb_splash.png"/>
+</item>
+<item>
+<title>XCB utility method for examing available methods</title>
+<link>
+http://digitaloctave.co.uk/pages/desktop_enviroment/sdir_utility.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/desktop_enviroment/sdir_utility.htm
+</guid>
+<description>Simple extended dir function for inspecting xcb.</description>
+<pubDate>Wed, 19 Aug 2015 23:00:00 -0000</pubDate>
+<category>xcb</category>
+<category>python</category>
+<category>util</category>
+<media:thumbnail url="http://digitaloctave.co.uk/static/images/x/xcb_sdir.png"/>
+</item>
+<item>
+<title>X Desktop Tutorial.</title>
+<link>
+http://digitaloctave.co.uk/pages/desktop_enviroment/index.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/desktop_enviroment/index.htm
+</guid>
+<description>
+Using X build a desktop, learn to package and deploy it and create a login screen.
+</description>
+<pubDate>Tue, 30 Jun 2015 23:00:00 -0000</pubDate>
+<category>python</category>
+<category>xserver</category>
+<category>xcb</category>
+<category>index</category>
+<media:thumbnail url="http://digitaloctave.co.uk/static/images/x/xorg.png"/>
+</item>
+<item>
+<title>Handling X keyboard events</title>
+<link>
+http://digitaloctave.co.uk/pages/desktop_enviroment/keyboard_events.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/desktop_enviroment/keyboard_events.htm
+</guid>
+<description>Example demonstrating handling X keybaord events.</description>
+<pubDate>Sat, 09 May 2015 23:00:00 -0000</pubDate>
+<category>xcb</category>
+<category>python</category>
+<category>keyboard</category>
+<media:thumbnail url="http://digitaloctave.co.uk/static/images/x/xcb_window_keyboard_events.png"/>
+</item>
+<item>
+<title>Handling X mouse events</title>
+<link>
+http://digitaloctave.co.uk/pages/desktop_enviroment/mouse_events.htm
+</link>
+<guid isPermaLink="false">
+http://digitaloctave.co.uk/pages/desktop_enviroment/mouse_events.htm
+</guid>
+<description>Example demonstrating handling X mouse events.</description>
+<pubDate>Fri, 03 Apr 2015 23:00:00 -0000</pubDate>
+<category>xcb</category>
+<category>python</category>
+<category>mouse</category>
+<media:thumbnail url="http://digitaloctave.co.uk/static/images/x/xcb_window_mouse_events.png"/>
+</item>
+</channel>
+</rss>

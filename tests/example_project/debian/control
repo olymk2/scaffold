@@ -1,0 +1,14 @@
+Source: test-package
+Section: python
+Priority: optional
+Maintainer: Example User <support@example.com>
+Build-Depends: debhelper (>= 7), python-dev, python-support (>=0.3)
+Vcs-Bzr: https://launchpad.net/maidstone-hackspace
+Standards-Version: 3.9.3
+XS-Python-Version: all
+
+Package: test-package
+Architecture: all
+Depends: ${python:Depends}
+Description: Maidstone Hackspace Website
+ Packaged website for easy deploy to servers

@@ -1,0 +1,44 @@
+<rss version="2.0">
+<channel>
+<title>xkcd.com</title>
+<link>http://xkcd.com/</link>
+<description>xkcd.com: A webcomic of romance and math humor.</description>
+<language>en</language>
+<item>
+<title>Backslashes</title>
+<link>http://xkcd.com/1638/</link>
+<description>
+<img src="http://imgs.xkcd.com/comics/backslashes.png" title="I searched my .bash_history for the line with the highest ratio of special characters to regular alphanumeric characters, and the winner was: cat out.txt | grep -o &quot;\\\[[(].*\\\[\])][^)\]]*$&quot; ... I have no memory of this and no idea what I was trying to do, but I sure hope it worked." alt="I searched my .bash_history for the line with the highest ratio of special characters to regular alphanumeric characters, and the winner was: cat out.txt | grep -o &quot;\\\[[(].*\\\[\])][^)\]]*$&quot; ... I have no memory of this and no idea what I was trying to do, but I sure hope it worked." />
+</description>
+<pubDate>Tue, 02 Feb 2016 05:00:00 -0000</pubDate>
+<guid>http://xkcd.com/1638/</guid>
+</item>
+<item>
+<title>Salt Mine</title>
+<link>http://xkcd.com/1637/</link>
+<description>
+<img src="http://imgs.xkcd.com/comics/salt_mine.png" title="This one is a little bland. Pass the saltshaker?" alt="This one is a little bland. Pass the saltshaker?" />
+</description>
+<pubDate>Mon, 01 Feb 2016 05:00:00 -0000</pubDate>
+<guid>http://xkcd.com/1637/</guid>
+</item>
+<item>
+<title>XKCD Stack</title>
+<link>http://xkcd.com/1636/</link>
+<description>
+<img src="http://imgs.xkcd.com/comics/xkcd_stack.png" title="This site requires Sun Java 6.0.0.1 (32-bit) or higher. You have Macromedia Java 7.3.8.1¾ (48-bit). Click here [link to java.com main page] to download an installer which will run fine but not really change anything." alt="This site requires Sun Java 6.0.0.1 (32-bit) or higher. You have Macromedia Java 7.3.8.1¾ (48-bit). Click here [link to java.com main page] to download an installer which will run fine but not really change anything." />
+</description>
+<pubDate>Fri, 29 Jan 2016 05:00:00 -0000</pubDate>
+<guid>http://xkcd.com/1636/</guid>
+</item>
+<item>
+<title>Birdsong</title>
+<link>http://xkcd.com/1635/</link>
+<description>
+<img src="http://imgs.xkcd.com/comics/birdsong.png" title="Maybe if I put it in a box for a while with a speaker playing some pleasant pastoral music, I can reprogram it." alt="Maybe if I put it in a box for a while with a speaker playing some pleasant pastoral music, I can reprogram it." />
+</description>
+<pubDate>Wed, 27 Jan 2016 05:00:00 -0000</pubDate>
+<guid>http://xkcd.com/1635/</guid>
+</item>
+</channel>
+</rss>
