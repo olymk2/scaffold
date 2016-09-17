@@ -10,7 +10,6 @@ from scaffold.readers.markdown_reader import markdown_reader
 from tests.test_utils import TestUtils
 
 class TestBasePage(TestUtils):
-    
     def setUp(self):
         with web.template as setup:
             pass
