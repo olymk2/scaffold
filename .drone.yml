@@ -1,5 +1,6 @@
 build:
   image: olymk2/scaffold
+  pull: true
   commands:
 #    - sleep 15
     - nose2
