@@ -1,7 +1,7 @@
 # todo add init and update arguments, so we can call scaffold.builder init or update
 import os, sys
 import shutil
-import docs
+from scaffold.builder import docs
 from scaffold.builder.minify import generate_static_content
 from scaffold.builder import debian
 from scaffold import web
