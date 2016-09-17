@@ -89,7 +89,7 @@ class TestBasePage(TestDataSetup):
         user = select_str_query({'id': '1'}).get()
 
     def test_get_grouped_records(self):
-        cats = [(row[0],row[1]) for row in select_simple_group()]
+        cats = [(row['name'],row['total']) for row in select_simple_group()]
         self.assertEquals(cats, [(u'fruit', 7), (u'pasta', 8), (u'veg', 3)])
 
     def test_select_varying_where(self):

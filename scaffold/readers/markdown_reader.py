@@ -1,4 +1,5 @@
 import os
+from io import open
 import misaka
 from scaffold import web
 from misaka import HtmlRenderer
@@ -28,5 +29,6 @@ class markdown_reader:
     def render(self):
         if not os.path.exists(self.markdown_file):
             print('Markdown file does not exist')
-        with open(self.markdown_file, 'r') as fp:
-            return self.md.render(fp.read())
+        with open(self.markdown_file, encoding='UTF-8') as fp:
+            #changed from .render to ()
+            return self.md(fp.read())

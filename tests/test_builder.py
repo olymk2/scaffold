@@ -38,7 +38,7 @@ class TestBuilder(TestDataSetup):
         #shutil.rmtree(path)
     
     def test_generate_new_project_in_current_path(self):
-        path = '/tmp/example_project'
+        path = os.path.abspath('./example_project')
         builder_main(AttributeDict({
             'cmd':'init',
             'verbose': False}))

@@ -40,13 +40,9 @@ class webpage(object):
         self.render_start = time.time()
 
     def load_widgets(self, module_path):
-        print('load widgets')
-        print(os.path.abspath(module_path))
-        print(os.path.abspath(module_path))
         sub_module_list = [mod[0:-3] for mod in os.listdir(os.path.abspath(module_path)) if mod.endswith('.py') and mod != '__init__.py']
         module_name = module_path.replace(os.sep, '.')
         self.custom_widgets = __import__(module_name, globals(), locals(), sub_module_list)
-        #~ import sys;sys.exit(1)
 
     def __enter__(self):
         self.render_start = time.time()

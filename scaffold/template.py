@@ -8,10 +8,10 @@ from .core.template import base_template
 class page_template(base_template):
     """ layout the html page insert javascript files create header etc """
     #<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:sa="/">
-    template_start = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+    template_start = (u"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
                     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
                     "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" xmlns:sa=\"/\">\n\t<head>\n\t\t")
-    template_end = "\n\t</head>\n\t<body>\n\t"
+    template_end = u"\n\t</head>\n\t<body>\n\t"
     body_end = "\n\t</body>\n</html>\n\t"
     
     order = ('header', 'includes', 'javascript_includes', 'css_includes', 'jscript', 'body', 'footer')
@@ -185,7 +185,6 @@ class page_template(base_template):
     def generate(self):
         #if the document has content then its been previously populated via cache or by user maybe
         self.document_text = self.template_start
-        #~ import ipdb; ipdb.set_trace()
         if self.cache_loaded is False:
             for css in self.document["css_includes"]:
                 self.document['header'].append('<link rel="stylesheet" id="navigationCss" href="' + css + '" media="" type="text/css" />\n')

@@ -16,7 +16,7 @@ class TestBasePage(TestUtils):
             pass
         web.template.append(
             markdown_reader().
-            create('./tests/resources/markdown_reader.md').
+            create(os.path.abspath('./tests/resources/markdown_reader.md')).
             render()
         )
 
