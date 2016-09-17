@@ -12,17 +12,13 @@ from tests.test_utils import TestUtils
 class TestBasePage(TestUtils):
     def setUp(self):
         self.maxDiff = None
-        with web.template as setup:
-            pass
-        web.template.append(
-            markdown_reader().
-            create(os.path.abspath('./tests/resources/markdown_reader.md')).
+        self.markdown_result = markdown_reader(). \
+            create(os.path.abspath('./tests/resources/markdown_reader.md')). \
             render()
-        )
 
     def test_markdown_reader(self):
         with open('./tests/resources/markdown_page.htm', encoding='UTF-8') as htm:
-            text1, text2 = self.clean(htm.read(), web.render())
+            text1, text2 = self.clean(htm.read(), self.markdown_result)
             self.assertEqual(text1, text2)
 
 if __name__ == '__main__':

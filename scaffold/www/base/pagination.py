@@ -49,7 +49,7 @@ class control(base_widget):
         print(total)
         print(page)
         if total > perpage:
-            self.total = int(ceil(total/float(perpage))+1)
+            self.total = int(ceil(total / float(perpage)) + 1)
             self.limit = perpage
             self.current = page
         return self
