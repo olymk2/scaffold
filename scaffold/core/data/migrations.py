@@ -18,10 +18,11 @@ sys.path.append(current_path_settings)
 if os.path.exists(current_path_settings):
     from config import settings
 
-from database import db as dataset
-from select import select_data
-from insert import insert_data
-from update import update_data
+from scaffold.core.data.database import db
+#from database import db as dataset
+from scaffold.core.data.select import select_data
+from scaffold.core.data.insert import insert_data
+from scaffold.core.data.update import update_data
 
 
 def text_num_split(value):

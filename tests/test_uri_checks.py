@@ -14,7 +14,7 @@ non_persistent_header_include = ['<link rel="stylesheet" id="navigationCss" href
 
 class TestDataSetup(unittest.TestCase):
     def setUp(self):
-        web.load_widgets('widgets')
+        web.load_widgets('tests/widgets')
         with web.template as setup:
             setup.persistent_header(header_include[0])
             setup.persistant_uris(schema='https:', domain='test.com', port='5000')

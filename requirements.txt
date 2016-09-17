@@ -1,0 +1,7 @@
+#core
+pillow
+
+#usefull features
+cssmin
+ply==3.4
+slimit

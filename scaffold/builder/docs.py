@@ -1,7 +1,7 @@
 import os
 import token
 import tokenize
-from StringIO import StringIO
+from io import StringIO
 from scaffold import web
 
 # TODO use built in breadcrumbs
@@ -70,7 +70,7 @@ def build_relative_path_list(root, path):
 
 class parse_source_code:
     splitter = ['args:', 'links:', 'images:', 'returns:']
-    htm = StringIO("")
+    htm = StringIO()
 
     def title(self, text):
         raise NotImplemented

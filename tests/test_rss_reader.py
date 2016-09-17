@@ -7,24 +7,24 @@ import webbrowser
 
 sys.path.insert(0,os.path.abspath('../'))
 from scaffold.readers.rss_reader import feed_reader
-from test_utils import TestUtils
+#from test_utils import TestUtils
 
 rss_feeds = [{
         'author':'Author 01',
-        'url': './test_data/rss_feed_digitaloctave.rss'
+        'url': './tests/test_data/rss_feed_digitaloctave.rss'
     }, {
         'author':'Author 02', 'tags': ['tech'], 
-        'url': './test_data/rss_feed_xkcd.rss'
+        'url': './tests/test_data/rss_feed_xkcd.rss'
     }, {
         'author':'Author 03', 
-        'url': './test_data/rss_feed_invalid.rss'
+        'url': './tests/test_data/rss_feed_invalid.rss'
     }, {
         'author':'Author 04', 
-        'url': './test_data/rss_feed_no_tags.rss'
+        'url': './tests/test_data/rss_feed_no_tags.rss'
     }]
 
 
-class TestBasePage(TestUtils):
+class TestBasePage(unittest.TestCase):
     def setUp(self):
         self.feeds = feed_reader(rss_feeds)
 

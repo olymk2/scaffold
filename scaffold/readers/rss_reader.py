@@ -35,6 +35,7 @@ namespaces = {
 
 from email.utils import parsedate_tz, mktime_tz
 
+
 class feed_reader:
     """parse a list of feeds and return details as dictionary data"""
     #create the html cleaner, this is to clean out unwanted html tags in the description text
@@ -74,7 +75,6 @@ class feed_reader:
                     continue
             else:
                 with open(os.path.abspath(feed_info.get('url')), 'r') as file_stream:
-                    print(os.path.abspath(feed_info.get('url')))
                     try:
                         self.feed = lxml.etree.parse(file_stream, self.xml_parser)
                     except:

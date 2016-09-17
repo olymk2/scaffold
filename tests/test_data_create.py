@@ -12,7 +12,7 @@ from scaffold.core.data.insert import insert_data
 from scaffold.core.data.update import update_data
 from scaffold.core.data.delete import delete_data
 from scaffold.core.data.sql import query_builder
-from test_data_setup import * 
+from tests.test_data_setup import * 
 
 query_builder.query_path = os.path.abspath('./data/sql/')
 
@@ -33,8 +33,7 @@ class TestBasePage(TestDataSetup):
                 'last_name': u'fuz¬`|ie'
         })
         results = [row for row in select()]
-        
-        #make sure this column was updated automatically with python
+        # make sure this column was updated automatically with python during insert
         self.assertIsNotNone(results[0]['created'])
         
         #do we have a new row inserted ?
@@ -62,8 +61,7 @@ class TestBasePage(TestDataSetup):
         })
 
         user = select().get()
-        #make sure this column was updated automatically with python
-        self.assertIsNone(user['modified'])
+        self.assertIsNotNone(user)
 
         updated_cols = ('username', 'email', 'password', 'first_name', 'last_name')
         update().execute({
@@ -92,7 +90,7 @@ class TestBasePage(TestDataSetup):
 
     def test_get_grouped_records(self):
         cats = [(row[0],row[1]) for row in select_simple_group()]
-        self.assertEquals(cats, [(7, u'fruit'), (8, u'pasta'), (3, u'veg')])
+        self.assertEquals(cats, [(u'fruit', 7), (u'pasta', 8), (u'veg', 3)])
 
     def test_select_varying_where(self):
         self.assertEqual(

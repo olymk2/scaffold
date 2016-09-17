@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import unittest
 import os, sys, shutil
-from StringIO import StringIO
+from io import StringIO
 sys.path.insert(0,os.path.abspath('../'))
 from scaffold import web
 from scaffold.builder.__main__ import main as builder_main
-from test_data_setup import * 
+from tests.test_data_setup import * 
 
 
 class AttributeDict(dict): 
@@ -42,8 +42,7 @@ class TestBuilder(TestDataSetup):
         builder_main(AttributeDict({
             'cmd':'init',
             'verbose': False}))
-        
-        
+
         self.assertTrue(os.path.exists(path + '/site/static/css'))
         self.assertTrue(os.path.exists(path + '/debian/control'))
         self.assertTrue(os.path.exists(path + '/debian/rules'))

@@ -28,6 +28,7 @@ class select(select_data):
     table = 'users'
     required = {}
     columns = {'id', 'email', 'password', 'username', 'first_name', 'last_name', 'created', 'modified'}
+    # debug = True
 
 class select_simple_group(select_data):
     table = 'categories'
@@ -50,18 +51,14 @@ class select_str_join_query(select_data):
     columns_where = {'users.id'}
 
 class create(insert_data):
-    #~ debug = True
+    #debug = True
     table = 'users'
-    required = {'email', 'password', 'username', 'first_name', 'last_name'}
+    required = {'email', 'password', 'username', 'first_name', 'last_name', 'created'}
     columns = {'email', 'password', 'username', 'first_name', 'last_name', 'created'}
     columns_optional = {'profile_image'}
 
     def calculated_data(self):
         return {'created': time.strftime('%Y-%m-%d %H:%M:%S')}
-
-    #~ def set(self, data):
-        #~ data['created'] = time.strftime('%Y-%m-%d %H:%M:%S')
-        #~ super(create, self).set(data)
 
 class create_user_details(insert_data):
     #~ debug = True
@@ -84,7 +81,7 @@ class update(update_data):
     columns_where = {'id'}
     columns = {'email', 'password', 'username', 'first_name', 'last_name', 'modified'}
     columns_optional = {'email', 'password', 'username', 'first_name', 'last_name'}
-
+    # debug = True
     def calculated_data(self):
         return {'modified': time.strftime('%Y-%m-%d %H:%M:%S')}
 

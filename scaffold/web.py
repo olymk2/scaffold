@@ -40,9 +40,12 @@ class webpage(object):
         self.render_start = time.time()
 
     def load_widgets(self, module_path):
-        sub_module_list = [mod[0:-3] for mod in os.listdir(module_path) if mod.endswith('.py') and mod != '__init__.py']
+        print('load widgets')
+        print(os.path.abspath(module_path))
+        print(os.path.abspath(module_path))
+        sub_module_list = [mod[0:-3] for mod in os.listdir(os.path.abspath(module_path)) if mod.endswith('.py') and mod != '__init__.py']
         module_name = module_path.replace(os.sep, '.')
-        self.custom_widgets = __import__(module_path, globals(), locals(), sub_module_list)
+        self.custom_widgets = __import__(module_name, globals(), locals(), sub_module_list)
         #~ import sys;sys.exit(1)
 
     def __enter__(self):
@@ -197,7 +200,7 @@ class webpage(object):
         self.render_end = time.time()
         self.render_time = self.render_end - self.render_start
         self.render_start = self.render_end
-        return self.template.render().encode('UTF-8')
+        return self.template.render()#.encode('UTF-8')
 
     def preview(self):
         """ dump content to a temporary file and open in browser """

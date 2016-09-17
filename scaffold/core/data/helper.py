@@ -3,7 +3,6 @@ import sys
 
 def required_values(data, required):
     # changed from viewkeys for python3
-    print(type(required))
     #if not data.keys() >= required:
     #    print(required.difference(data.keys()))
     #    print('required params = ' + str(required))

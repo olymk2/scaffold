@@ -57,7 +57,7 @@ class db:
         #sqllite database
         if dbtype == 'sqllite':
             db.dbtype = DBTYPE_SQLLITE
-            self.use_commit = False
+            #self.use_commit = False
             self.connection = sqlite3.connect(connection_details['host'])
             self.connection.row_factory = sqlite3.Row
             self.cursor = self.connection.cursor()
@@ -124,6 +124,7 @@ class db:
     def execute_query(self, sql, values):
         try:    
             self.cursor.execute(sql, values)
+            self.commit()
         except MySQLdb.Error as e:
             print(e)
             print(sql)
@@ -145,8 +146,8 @@ class db:
             values = []
         if self.debug:
             print(sql.format(values))
-        self.cursor.execute(sql, values)
-                
+        self.execute_query(sql, values)
+        # self.cursor.execute(sql, values)
         #return self.commit()
 
     def insert(self, table, fieldnames=(), values=()):

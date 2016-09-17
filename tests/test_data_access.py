@@ -12,7 +12,7 @@ from scaffold.core.data.insert import insert_data
 from scaffold.core.data.update import update_data
 from scaffold.core.data.delete import delete_data
 from scaffold.core.data.sql import query_builder
-from test_data_setup import * 
+from tests.test_data_setup import * 
 
 query_builder.query_path = os.path.abspath('./data/sql/')
 
@@ -91,8 +91,8 @@ class TestBasePage(TestDataSetup):
         user = select_str_query({'id': '1'}).get()
 
     def test_get_grouped_records(self):
-        cats = [(row[0],row[1]) for row in select_simple_group()]
-        self.assertEquals(cats, [(7, u'fruit'), (8, u'pasta'), (3, u'veg')])
+        cats = [(row[0], row[1]) for row in select_simple_group()]
+        self.assertEquals(cats, [(u'fruit', 7), (u'pasta', 8), (u'veg', 3)])
 
     def test_select_varying_where(self):
         self.assertEqual(

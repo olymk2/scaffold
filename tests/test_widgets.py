@@ -4,24 +4,25 @@ import unittest
 import inspect
 import os, sys
 import traceback
-from StringIO import StringIO
-from test_utils import TestUtils
+from io import StringIO
+from tests.test_utils import TestUtils
 sys.path.insert(0,os.path.abspath('../'))
 from scaffold import web
-
-
 
 class TestBasePage(TestUtils):
     
     def setUp(self):
-        web.load_widgets('widgets')
+        self.maxDiff = None
+        self.rel_path = os.path.dirname(__file__) + '/..'
+        # web.load_widgets('widgets')
 
+        web.load_widgets('tests/widgets')
         with web.template as setup:
             setup.persistant_uris(schema='http:', domain='localhost', port='')
     
     def test_base_widget_instances(self):
-        for filename in os.listdir(os.path.abspath('../scaffold/www/base/')):
-            if os.path.isdir(os.path.abspath('../scaffold/www/base/') + filename):
+        for filename in os.listdir(self.rel_path + '/scaffold/www/base/'):
+            if os.path.isdir(self.rel_path + '/scaffold/www/base/' + filename):
                 continue
             if filename.endswith('.py'):
                 name = filename[0:-3]
@@ -32,8 +33,8 @@ class TestBasePage(TestUtils):
                     pass
 
     def test_default_widget_instances(self):
-        for filename in os.listdir(os.path.abspath('../scaffold/www/default_widgets')):
-            if os.path.isdir(os.path.abspath('../scaffold/www/default_widgets') + filename):
+        for filename in os.listdir(self.rel_path + '/scaffold/www/default_widgets'):
+            if os.path.isdir(self.rel_path + '/scaffold/www/default_widgets' + filename):
                 continue
             if filename.endswith('.py'):
                 name = filename[0:-3]
@@ -63,37 +64,22 @@ class TestBasePage(TestUtils):
         web.example.create()
         web.template.append(web.example.render())
 
-        expected = """
+        expected = u"""
             <?xml version="1.0" encoding="utf-8"?>
-                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-                <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:sa="/">
-                    <head>
-                    </head>
-                    <body>
-                        <div id="example"></div>
-                        <script type="text/javascript" ><!--//--><![CDATA[//><!--var test="hello world";//]]></script>
-                    </body>
-                </html>"""
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:sa="/">
+                <head>
 
-
-        #~ expected = """<?xml version="1.0" encoding="utf-8"?>
-            #~ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-            #~ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:sa="/">
-                #~ <head>
-                    #~ <link rel="stylesheet" id="navigationCss" href="/static/css/default.css" media="" type="text/css" />
-                    #~ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-                    #~ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-                #~ </head>
-                #~ <body>
-                #~ <div id="example"></div><script type="text/javascript" ><!--//--><![CDATA[//><!--
-            #~ var test="hello world";
-            #~ //]]>
-            #~ </script>
-
-                #~ </body>
-            #~ </html>
-            #~ """
-
+                </head>
+                <body>
+                <div id="example"></div><script type="text/javascript" ><!--//--><![CDATA[//><!--
+            var test="hello world";
+            //]]>
+            </script>
+                </body>
+            </html>
+        """
+        #print(web.render())
         text1, text2 = self.clean(expected, web.render())
         self.assertEqual(text1, text2)
 	
@@ -108,14 +94,26 @@ class TestBasePage(TestUtils):
                 {'htm': 'Test Contents'},
             'error':
                 {'htm': 'Test Contents'},
+            'like':
+                {'url': 'url'},
+            'page':
+                {'title': 'Test title'},
             'head':
                 {'title': 'Test Contents'},
             'webglviewer':
                 {'htm': 'Test Contents'},
+            'images':{
+                'image': 'test.png',
+                'title': 'test title'
+            },
+            'container':
+                {'content': 'test content'},
+            'select':
+                {'name': 'select_name'},
             'pagination':{
-                'htm': 'Test Contents',
-                'perpage': '10',
-                'total': '30'},
+                'page': 1,
+                'perpage': 10,
+                'total': 30},
             'list_box':{
                 'title': 'Title',
                 'link': 'http://www.example.com',
@@ -141,13 +139,10 @@ class TestBasePage(TestUtils):
                     if result==1:
                         getattr(web, item).test()
                     else:
-                        #~ print "\n" + getattr(web, item).test(*test_params.get(item, {'htm': 'Test Contents'}))
                         result = getattr(web, item).test(*test_params.get(item, {'htm': 'Test Contents'}))
-                        #~ print result[0]
-                        #~ print result
-                        self.assertEqual(result[0], expected.get(item,'<'))
+                        self.assertEqual(result[0].strip(), expected.get(item, '<'))
                 except:
-                    print inspect.getargspec(getattr(web, item).create).args
+                    print(inspect.getargspec(getattr(web, item).create).args)
                     print(traceback.format_exc())
 
 

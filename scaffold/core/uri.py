@@ -30,8 +30,6 @@ class uri_path(object):
         self.ful = '%s//%s%s' % (schema, domain, self.port)
         self.med = '//%s%s/%s/' % (domain, self.port, static)
         self.img = '//%s%s/%s/%s/' % (domain, self.port, static, images)
-        print(self.ful)
-        print('update')
 
     def add_domain(self, path):
         """given a uri make it a full url but with out schema, 

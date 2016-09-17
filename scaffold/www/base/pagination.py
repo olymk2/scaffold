@@ -43,6 +43,9 @@ class control(base_widget):
         Returns:
             Nothing
         """
+        print(perpage)
+        print(total)
+        print(page)
         if total > perpage:
             self.total=int(ceil(total/float(perpage))+1)
             self.limit=perpage

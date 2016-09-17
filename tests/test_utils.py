@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 import os, sys
-from StringIO import StringIO
+from io import StringIO
 
 sys.path.insert(0,os.path.abspath('../'))
 from scaffold import web
