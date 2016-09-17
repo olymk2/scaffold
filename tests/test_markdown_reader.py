@@ -11,6 +11,7 @@ from tests.test_utils import TestUtils
 
 class TestBasePage(TestUtils):
     def setUp(self):
+        self.maxDiff = None
         with web.template as setup:
             pass
         web.template.append(
