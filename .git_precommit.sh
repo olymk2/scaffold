@@ -1,4 +1,4 @@
-#ln -s .git_precommit.sh .git/hooks/pre-commit
+#ln -s .git_precommit.sh ../../.git/hooks/pre-commit
 
 # save state should only run against staged files
 git stash -q --keep-index
