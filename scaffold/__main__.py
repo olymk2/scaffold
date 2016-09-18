@@ -1,4 +1,4 @@
-from builder.__main__ import main as builder_main
+from scaffold.builder.__main__ import main as builder_main
 from scaffold.core.data.migrations import export_schema, import_schema
 import argparse
 

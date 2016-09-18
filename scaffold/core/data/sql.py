@@ -54,7 +54,7 @@ class query(object):
         
         for key, value in self.calculated_data().items():
             self.data[key] = value
-
+        
 
     def query(self):
         return self.sql
