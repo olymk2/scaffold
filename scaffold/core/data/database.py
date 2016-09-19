@@ -39,7 +39,7 @@ class db:
             del(connection_details['location'])
 
         self.use_commit = True
-
+        print(connection_details)
         #mysql database
         if dbtype == 'mysql':
             db.dbtype = DBTYPE_MYSQL
