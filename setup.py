@@ -7,7 +7,7 @@ def read(fname):
 
 setup(
     name = "scaffold",
-    version = "0.0.4",
+    version = "0.0.5",
     author = "Oliver Marks",
     author_email = "olymk2@gmail.com",
     description = ("Web templating library"),
