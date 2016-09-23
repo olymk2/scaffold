@@ -18,13 +18,16 @@ DBTYPE_MYSQL = 0
 DBTYPE_SQLLITE = 1
 DBTYPE_POSTGRES = 1
 
-class db:
+
+class db(object):
+    """core database connection class"""
     name = None
     connection = None
     connection_settings = {}
     dbtype = DBTYPE_MYSQL  # 0 = mysql, 1 = sqllite
     cursor = None
     debug = False
+    use_commit = True
 
     @classmethod
     def config(cls, connection_settings):
@@ -39,7 +42,7 @@ class db:
             del(connection_details['location'])
 
         self.use_commit = True
-        print(connection_details)
+
         #mysql database
         if dbtype == 'mysql':
             db.dbtype = DBTYPE_MYSQL

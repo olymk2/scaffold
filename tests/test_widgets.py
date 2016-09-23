@@ -87,6 +87,26 @@ class TestBasePage(TestUtils):
         web.auto_load_all()
 
         test_params = {
+            'progress_bar': {},
+            'error':{},
+            'example':{},
+            'webglviewer': {},
+            'toolbar': {},
+            'notifications': {},
+            'menu_slide_down': {},
+            'carousel': {},
+            'section': {},
+            'debug': {},
+            'buttons': {},
+            'border': {},
+            'markdown_editor': {},
+            'notify': {},
+            'banner_flip': {},
+            'loginBox': {},
+            'boxgrid': {},
+            'banner_slide': {},
+            'menu': {},
+
             'google_analytics':{
                 'url': 'http://www.example.com', 
                 'code': '2353647647'},
@@ -139,9 +159,13 @@ class TestBasePage(TestUtils):
                     if result==1:
                         getattr(web, item).test()
                     else:
-                        result = getattr(web, item).test(*test_params.get(item, {'htm': 'Test Contents'}))
+                        if test_params.get(item) == {}:
+                            result = getattr(web, item).test()
+                        else:
+                            result = getattr(web, item).test(test_params.get(item, {'htm': 'Test Contents'}))
                         self.assertEqual(result[0].strip(), expected.get(item, '<'))
                 except:
+                    print(item)
                     print(inspect.getargspec(getattr(web, item).create).args)
                     print(traceback.format_exc())
 

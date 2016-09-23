@@ -16,9 +16,4 @@ compose:
           - MYSQL_PASSWORD=test_runner
           - MYSQL_DATABASE=test_runner
           - MYSQL_ROOT_PASSWORD=test_runner
-      commands:
-          - mysql -h 127.0.0.1 -u test_runner -e 'USE test_runner; SELECT 1;'
 
-script:
-#  - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE test;'
-  - mysql -h 127.0.0.1 -u test_runner -e 'USE test_runner; SELECT 1;'

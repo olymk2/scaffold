@@ -20,9 +20,9 @@ database = {'host':'test_simple_querys.db', 'type': 'sqllite', 'charset': 'utf-8
 db.config(database)
 
 class delete(delete_data):
-        table = 'users'
-        required = {'id'}
-        columns = {}
+    table = 'users'
+    required = {'id'}
+    columns = {}
 
 class select(select_data):
     table = 'users'
@@ -51,7 +51,7 @@ class select_str_join_query(select_data):
     columns_where = {'users.id'}
 
 class create(insert_data):
-    #debug = True
+    # debug = True
     table = 'users'
     required = {'email', 'password', 'username', 'first_name', 'last_name', 'created'}
     columns = {'email', 'password', 'username', 'first_name', 'last_name', 'created'}
@@ -94,6 +94,7 @@ class update_last_login(update_data):
 
 class TestDataSetup(unittest.TestCase):
     def setUp(self):
+        db.config(database)
         if os.path.exists(database.get('host')):
             os.remove(database.get('host'))
         with db() as data:

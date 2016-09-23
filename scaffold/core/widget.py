@@ -29,10 +29,10 @@ class base_widget(base_site):
         return cls().create(*args)
 
     @classmethod
-    def test(cls, *args):
+    def test(cls, args):
         """initalise the class with some default values and render the result"""
         tst = cls()
-        tst.create(*args)
+        tst.create(**args)
         return tst.render()
 
     def __init__(self):

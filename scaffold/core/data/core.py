@@ -3,7 +3,7 @@ import sys
 import argparse
 
 
-from scaffold.core.data.database import db
+from scaffold.core.data.database import db as dataset
 #from database import db as dataset
 from scaffold.core.data.select import select_data
 from scaffold.core.data.insert import insert_data
