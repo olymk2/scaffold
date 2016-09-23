@@ -26,6 +26,9 @@ class control(base_widget):
         self.link = link
         return self
 
+    #def test(self):
+    #    return self.render()
+
     def render(self):
         link = ''
         self.count += 1

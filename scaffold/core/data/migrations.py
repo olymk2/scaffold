@@ -18,7 +18,7 @@ sys.path.append(current_path_settings)
 if os.path.exists(current_path_settings):
     from config import settings
 
-from scaffold.core.data.database import db
+from scaffold.core.data.database import db as dataset
 #from database import db as dataset
 from scaffold.core.data.select import select_data
 from scaffold.core.data.insert import insert_data

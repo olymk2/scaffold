@@ -112,6 +112,10 @@ class TestBasePage(TestUtils):
                 'code': '2353647647'},
             'progress_bar':
                 {'htm': 'Test Contents'},
+            'breadcrumbs':
+                {'root': 'Test Contents'},
+            'lorem':
+                {'length': 20},
             'error':
                 {'htm': 'Test Contents'},
             'like':
@@ -147,6 +151,62 @@ class TestBasePage(TestUtils):
                 'title': 'Link Title',
                 'content': 'Display Text',
                 'link': 'http://www.example.com'},
+            'content':{
+                'title': '',
+                'header': '',
+                'footer': '',
+                'id':''
+            },
+            'barview': {
+                'left': '',
+                'centre': '',
+                'right': ''
+            },
+            'list': {
+                'text': 'lorem',
+                'ordered': True
+            },
+            'gantt': {
+                'text': 'text',
+                'data_max': 20
+            },
+            'table': {
+                'title': 'table title',
+                'header': 'table header',
+                'footer': 'table footer',
+                'id': 'tableid'
+            },
+            'map': {
+                'name': 'map_name'
+            },
+            'help': {
+                'title': 'test title'
+            },
+            'menu': {
+                'select': 'menuitem'
+            },
+            'boxes': {
+                'id': 'boxid',
+                'width': '100px',
+                'height': '100px'
+            },
+            'google_plus': {
+                'url': 'http://www.example.com',
+                'plus': True,
+                'share': 'share',
+                'comments': 'comments'
+            },
+            'simple_form': {
+                'action': 'action',
+                'method': 'method'
+            },
+            'form_old': {
+                'action': 'form action',
+                'method': 'method',
+                'enctype': 'enctype',
+                'node_id': 'nodeid',
+                'node_class': 'node class'
+            }
         }
 
         expected = {
@@ -157,7 +217,7 @@ class TestBasePage(TestUtils):
                 try:
                     result = len(inspect.getargspec(getattr(web, item).create).args)
                     if result==1:
-                        getattr(web, item).test()
+                        getattr(web, item).test({})
                     else:
                         if test_params.get(item) == {}:
                             result = getattr(web, item).test()
