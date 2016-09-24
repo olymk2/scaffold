@@ -101,16 +101,18 @@ class create_tables(insert_data):
                 self.query() % self.data['table_name'])
 
 def export_schema(args, export_path='./data/migrate'):
+    set_database_details(args=args)
+    export_path = args.__dict__.get('target', export_path)
     if dataset().connection_settings.get('type') is None:
-        return 'Unknown database type'
+        sys.exit('Unknown database type')
     if dataset().connection_settings.get('host') is None:
-        return "Missing database config"
+        sys.exit("Missing database config")
     if dataset().connection_settings.get('db'):
         schema_name = dataset().connection_settings.get('db')
     else:
         schema_name = dataset().connection_settings.get('host')
     print("Exporting %s" % schema_name)
-
+    print(dataset().connection_settings)
     table_list = []
     with open('%s/generated_tables.sql' % export_path, 'w') as tab_fp:
         print('Migrating database named %s' % schema_name)
@@ -175,7 +177,17 @@ def export_schema(args, export_path='./data/migrate'):
             col_fp.write("\n\n")
         #columns = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = %s;" % schema_name
 
+
+def set_database_details(args):
+    database = vars(args)
+    database['db'] = database['database']
+    database['user'] = database['username']
+    database['passwd'] = database['password']
+    dataset.config(database)
+
+
 def import_schema(args, import_path='./data/migrate'):
+    set_database_details(args=args)
     print("Importing into %s" % dataset().connection_settings.get('db'))
     table_list = []
     columns = []
