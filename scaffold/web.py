@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import time
+from types import MethodType
 
 #~ import www
 from .www import default_widgets
@@ -9,7 +10,8 @@ from .www import forms
 from .www import base as default_nodes
 from .www.encode.xmlstring import xml_string
 from .template import page_template
-from types import MethodType
+from .core.settings import logger
+
 
 # TODO add caching for pages added stub functions
 class webpage(object):
@@ -42,9 +44,8 @@ class webpage(object):
     def load_widgets(self, module_path):
         widget_path = os.path.abspath(module_path)
 
-        print('Path does not exist %s' % widget_path)
         if not os.path.exists(widget_path):
-            print('Path does not exist %s' % widget_path)
+            logger.warning('Widget path %s does not exists' % widget_path)
         sub_module_list = [mod[0:-3] for mod in os.listdir(widget_path) if mod.endswith('.py') and mod != '__init__.py']
         module_name = module_path.replace(os.sep, '.')
         self.custom_widgets = __import__(module_name, globals(), locals(), sub_module_list)

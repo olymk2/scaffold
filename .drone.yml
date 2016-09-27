@@ -3,7 +3,7 @@ build:
   pull: true
   commands:
     - sleep 10
-    - nose2
+    - python3 -m pytest
 
 compose:
     mariadb:

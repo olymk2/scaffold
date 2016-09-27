@@ -101,8 +101,8 @@ class create_tables(insert_data):
                 self.query() % self.data['table_name'])
 
 def export_schema(args, export_path='./data/migrate'):
-    set_database_details(args=args)
-    export_path = args.__dict__.get('target', export_path)
+    set_database_details(database=args)
+    export_path = args.get('target', export_path)
     if dataset().connection_settings.get('type') is None:
         sys.exit('Unknown database type')
     if dataset().connection_settings.get('host') is None:
@@ -178,16 +178,17 @@ def export_schema(args, export_path='./data/migrate'):
         #columns = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = %s;" % schema_name
 
 
-def set_database_details(args):
-    database = vars(args)
-    database['db'] = database['database']
-    database['user'] = database['username']
-    database['passwd'] = database['password']
-    dataset.config(database)
+def set_database_details(database):
+    #database = args
+    if database:
+        database['db'] = database['database']
+        database['user'] = database['username']
+        database['passwd'] = database['password']
+        dataset.config(database)
 
 
 def import_schema(args, import_path='./data/migrate'):
-    set_database_details(args=args)
+    set_database_details(database=args)
     print("Importing into %s" % dataset().connection_settings.get('db'))
     table_list = []
     columns = []

@@ -5,3 +5,4 @@ pillow
 cssmin
 ply==3.4
 slimit
+pytest

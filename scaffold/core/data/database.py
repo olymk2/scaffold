@@ -37,7 +37,6 @@ class db(object):
     def __enter__(self):
         connection_details = db.connection_settings
         dbtype = db.connection_settings.get('type', 'mysql')
-        print(connection_details)
         if connection_details.get('location') is not None:
             connection_details['host'] = connection_details['location']
             del(connection_details['location'])
