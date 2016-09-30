@@ -48,9 +48,9 @@ if args.cmd in ('minify', 'decorator'):
     builder_main(args)
 
 if args.cmd in ('import', 'construct'):
-    import_schema(args)
+    import_schema(vars(args))
 
 if args.cmd in ('migrate', 'deconstruct'):
-    export_schema(args)
+    export_schema(vars(args))
 
 
