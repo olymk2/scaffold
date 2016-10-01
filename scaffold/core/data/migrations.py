@@ -2,21 +2,9 @@ import os
 import sys
 import argparse
 
-try:
-    import pymysql 
-    pymysql.install_as_MySQLdb()
-    import MySQLdb
-except ImportError:
-    import MySQLdb
 
 
 sys.path.append(os.path.abspath('./'))
-
-#import config from current folder if it exists
-current_path_settings = os.getcwd() + os.sep + 'config/settings.py'
-sys.path.append(current_path_settings)
-if os.path.exists(current_path_settings):
-    from config import settings
 
 from scaffold.core.data.database import db as dataset
 #from database import db as dataset
@@ -24,6 +12,12 @@ from scaffold.core.data.select import select_data
 from scaffold.core.data.insert import insert_data
 from scaffold.core.data.update import update_data
 
+#import config from current folder if it exists
+current_path_settings = os.getcwd() + os.sep + 'config/settings.py'
+sys.path.append(current_path_settings)
+if os.path.exists(current_path_settings):
+    print('loading settings')
+    from config import settings
 
 def text_num_split(value):
     return (
@@ -101,18 +95,8 @@ class create_tables(insert_data):
                 self.query() % self.data['table_name'])
 
 def export_schema(args, export_path='./data/migrate'):
-    set_database_details(database=args)
-    export_path = args.get('target', export_path)
-    if dataset().connection_settings.get('type') is None:
-        sys.exit('Unknown database type')
-    if dataset().connection_settings.get('host') is None:
-        sys.exit("Missing database config")
-    if dataset().connection_settings.get('db'):
-        schema_name = dataset().connection_settings.get('db')
-    else:
-        schema_name = dataset().connection_settings.get('host')
+    schema_name, export_path = set_database_details(database=args, path=export_path)
     print("Exporting %s" % schema_name)
-    print(dataset().connection_settings)
     table_list = []
     with open('%s/generated_tables.sql' % export_path, 'w') as tab_fp:
         print('Migrating database named %s' % schema_name)
@@ -178,22 +162,42 @@ def export_schema(args, export_path='./data/migrate'):
         #columns = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = %s;" % schema_name
 
 
-def set_database_details(database):
-    #database = args
+def set_database_details(database, path):
+    # check if we have any params to pass
     if database:
-        database['db'] = database['database']
-        database['user'] = database['username']
-        database['passwd'] = database['password']
-        dataset.config(database)
+        matches = [x for x in ('database', 'username', 'password') if database.get(x, None) is not None]
+        if matches:
+            print('database params provided')
+            print(database)
+            database['db'] = database['database']
+            database['user'] = database['username']
+            database['passwd'] = database['password']
+            dataset.config(database)
+
+    export_path = database.get('target', path)
+    if dataset().connection_settings.get('type') is None:
+        sys.exit('Unknown database type %s' % datset().connection_settings.get('type'))
+    if dataset().connection_settings.get('host') is None:
+        sys.exit("Missing database config %s" % dataset().connection_settings.get('host'))
+    if dataset().connection_settings.get('db'):
+        schema_name = dataset().connection_settings.get('db')
+    else:
+        schema_name = dataset().connection_settings.get('host')
+    print(dataset().connection_settings)
+    return schema_name, path
 
 
 def import_schema(args, import_path='./data/migrate'):
-    set_database_details(database=args)
-    print("Importing into %s" % dataset().connection_settings.get('db'))
+    schema_name, import_path = set_database_details(database=args, path=import_path)
+    print("Importing into %s" % schema_name)
+
     table_list = []
     columns = []
     column_indexes = []
     for filename in ['%s/generated_columns.sql' % import_path, '%s/generated_column_indexes.sql' % import_path]:
+        print(filename)
+        if os.path.exists(filename):
+            print('file does not exists %s' % filename)
         with open(filename, 'r') as col_fp:
             for line in col_fp.readlines():
                 if line.startswith('ALTER TABLE '):
@@ -216,23 +220,14 @@ def import_schema(args, import_path='./data/migrate'):
     insert_tables = create_tables()
     for table in set(table_list):
         print(table)
-        try:
-            insert_tables.execute({'table_name': table})
-        except MySQLdb.Error as e:
-            print(e)
+        insert_tables.execute({'table_name': table})
 
     for column in columns:
         with dataset() as database:
             print(column)
-            try:
-                database.execute(column)
-            except MySQLdb.Error as e:
-                print(e)
+            database.execute(column)
                 
     for column in column_indexes:
         with dataset() as database:
             print(column)
-            try:
-                database.execute(column)
-            except MySQLdb.Error as e:
-                print(e)
+            database.execute(column)

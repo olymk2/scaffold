@@ -1,6 +1,9 @@
 import os
-import slimit
-import cssmin
+try:
+    import slimit
+    import cssmin
+except:
+    print('slimit or cssmin are not available')
 from PIL import Image
 
 
