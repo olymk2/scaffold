@@ -176,7 +176,7 @@ def set_database_details(database, path):
 
     export_path = database.get('target', path)
     if dataset().connection_settings.get('type') is None:
-        sys.exit('Unknown database type %s' % datset().connection_settings.get('type'))
+        sys.exit('Unknown database type %s' % dataset().connection_settings.get('type'))
     if dataset().connection_settings.get('host') is None:
         sys.exit("Missing database config %s" % dataset().connection_settings.get('host'))
     if dataset().connection_settings.get('db'):

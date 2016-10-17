@@ -89,8 +89,8 @@ def main(args=None):
 
     if 'minify' in sys.argv:
         print('Optimising static content')
-        source_path = getattr(args, 'path', os.path.abspath('./static_resources/'))
-        target_path = getattr(args, 'path', os.path.abspath('./static/'))
+        source_path = getattr(args, 'source', os.path.abspath('./static_resources/'))
+        target_path = getattr(args, 'target', os.path.abspath('./static/'))
         generate_static_content(source_path, target_path)
         
 
