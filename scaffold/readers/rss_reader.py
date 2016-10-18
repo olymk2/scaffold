@@ -176,7 +176,9 @@ class feed_reader:
 
     def format_author(self, author):
         """extract the authors name from the author text node"""
-        return author.split('(')[-1].strip(')')
+        if author:
+            return author.split('(')[-1].strip(')')
+        return 'Anonymous'
 
     def filter_by_tags(self, node, tags=None):
         """filter the feed out by category tag, if no tags assume its pre filtered"""
