@@ -1,8 +1,8 @@
 import time
 import cgi
 
-from email.Utils import formatdate
-from template import page_template
+from email.utils import formatdate
+from scaffold.template import page_template
 
 class rss(object):
     rsshead=""

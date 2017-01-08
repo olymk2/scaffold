@@ -5,11 +5,12 @@ import os, sys, shutil
 import tempfile
 import webbrowser
 
-sys.path.insert(0,os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('./'))
 from scaffold.readers.rss_reader import feed_reader
 #from test_utils import TestUtils
 
 rss_feeds = [{
+        'id': 'a',
         'author':'Author 01',
         'url': './tests/test_data/rss_feed_digitaloctave.rss'
     }, {
@@ -30,9 +31,8 @@ class TestBasePage(unittest.TestCase):
 
     def test_rss_reader(self):
         for row in self.feeds:
-            #~ print '---------'
-            #~ print '%s - %s' % (row.get('date'), row.get('author'))
             self.assertNotEqual('', row.get('author'))
+            self.assertNotEqual('', row.get('id'))
 
 
 if __name__ == '__main__':

@@ -58,7 +58,10 @@ class feed_reader:
 
     def __init__(self, feed_details, timeout=5):
         self.results = {}
+        pos = 1
         for feed_info in feed_details:
+            if not feed_info.get('id'):
+                feed_info['id'] = pos
             self.url = feed_info.get('url')
             self.author = feed_info.get('author')
             self.tags = feed_info.get('tags')
@@ -77,15 +80,14 @@ class feed_reader:
                 with open(os.path.abspath(feed_info.get('url')), 'r') as file_stream:
                     try:
                         self.feed = lxml.etree.parse(file_stream, self.xml_parser)
-                    except:
+                    except Exception as e:
                         continue
-            
             self.feed = self.feed.getroot()
-            
+
             # rss feed defaults
             self.channel_image = self.fetch_node_text(self.feed, 'channel/image/url', '')
-
-            self.parse_feed()
+            self.parse_feed(feed_info)
+            pos += 1
 
     def convert_rfc822_to_datetime(self, rfcdate):
         """rss uses rfc822 dates so lets convert them to datetime for use later"""
@@ -102,7 +104,7 @@ class feed_reader:
         if text is None:
             return ''
         cleaned_html = self.html_cleaner.clean_html(text)
-        
+
         # parse large text seperately
         if len(text) > 600:
             description = lxml.etree.parse(StringIO.StringIO(cleaned_html), self.html_parser)
@@ -197,14 +199,17 @@ class feed_reader:
             return True
         return False
 
-    def parse_feed(self):
+    def parse_feed(self, feed=None):
         """Parse the items in the feed, filter out bad data and put in defaults"""
+        if feed is None:
+            feed = {}
         for item in self.feed.xpath('.//item', namespaces=namespaces):
             date = self.convert_rfc822_to_datetime(self.fetch_node_text(item, 'pubDate'))
             if self.filter_by_date(date) and self.filter_by_tags(item):
                 author = self.format_author(self.fetch_node_text(item, 'author', self.author))
                 self.results.setdefault(author, []).append({
                 #~ self.results.append({
+                    'id': feed.get('id', 1),
                     'title': self.fetch_node_text(item, 'title'),
                     'date': date,
                     'url': self.fetch_node_text(item, 'link'),

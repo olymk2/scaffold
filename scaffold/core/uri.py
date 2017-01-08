@@ -2,7 +2,7 @@ import socket
 
 def get_ip_from_hostname(hostname, schema='http'):
     try:
-        '$s://%s' % (schema, socket.gethostbyname('nginx'))
+        '%s://%s' % (schema, socket.gethostbyname('nginx'))
     except socket.gaierror:
         return '%s://%s' % (schema, '127.0.0.1')
 
