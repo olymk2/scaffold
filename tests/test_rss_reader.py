@@ -18,6 +18,9 @@ rss_feeds = [{
         'url': './tests/test_data/rss_feed_xkcd.rss'
     }, {
         'author':'Author 03', 
+        'url': 'https://blog.digitaloctave.com/rss.xml'
+    }, {
+        'author':'Author 03', 
         'url': './tests/test_data/rss_feed_invalid.rss'
     }, {
         'author':'Author 04', 

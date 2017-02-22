@@ -65,7 +65,7 @@ class feed_reader:
             self.url = feed_info.get('url')
             self.author = feed_info.get('author')
             self.tags = feed_info.get('tags')
-            if feed_info.get('url').startswith('http:'):
+            if feed_info.get('url').startswith(('http:', 'https:')):
                 try:
                     response = requests.get(feed_info.get('url'), stream=True, timeout=timeout)
                 except (requests.exceptions.Timeout, Exception) as e:

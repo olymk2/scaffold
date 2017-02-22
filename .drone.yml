@@ -1,19 +1,23 @@
-build:
-  image: olymk2/scaffold
-  pull: true
-  commands:
-    - sleep 10
-    - python3 -m pytest
+workspace:
+  base: /drone
+  path: src
 
-compose:
-    mariadb:
-      container_name: database
-      image: olymk2/mariadb
-      pull: true
-      environment:
-          # - MYSQL_BULK=test_runner|test_runner|test_runner|test_runner
-          - MYSQL_USER=test_runner
-          - MYSQL_PASSWORD=test_runner
-          - MYSQL_DATABASE=test_runner
-          - MYSQL_ROOT_PASSWORD=test_runner
+pipeline:
+  tests:
+    image: olymk2/scaffold
+    pull: true
+    commands:
+      - python3 -m pytest
+
+# services:
+#     mariadb:
+#       container_name: database
+#       image: olymk2/mariadb
+#       pull: true
+#       environment:
+#           # - MYSQL_BULK=test_runner|test_runner|test_runner|test_runner
+#           - MYSQL_USER=test_runner
+#           - MYSQL_PASSWORD=test_runner
+#           - MYSQL_DATABASE=test_runner
+#           - MYSQL_ROOT_PASSWORD=test_runner
 
