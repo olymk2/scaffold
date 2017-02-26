@@ -106,7 +106,7 @@ class page_template(base_template):
         # todo obsolete this in favor of persistent path
         page_template.path = path
         page_template.path_static + path + 'static/'
-        
+
         #css javascript template images
         page_template.path_template = self.path_static + 'template/'
         page_template.path_javascript = self.path_static + 'js/'
@@ -132,8 +132,11 @@ class page_template(base_template):
     def set_cache_path(self, path=None):
         if path:
             page_template.cache_path = absolute_path + cache_folder + os.sep
-        if not os.path.exists(page_template.cache_path):
-            os.makedirs(page_template.cache_path)
+        try:
+            if not os.path.exists(page_template.cache_path):
+                os.makedirs(page_template.cache_path)
+        except:
+            print('Failed to create cache folder')
 
     def clear_cache(self):
         for filename in os.listdir(self.cache_path):
@@ -142,7 +145,7 @@ class page_template(base_template):
     def reset(self, full=True):
         self.document['header'] = list(self.template_global_header)
         self.document["jscript"] = []
-        
+
         self.document["includes"] = ''
         #~ self.document["htmhead"] = []
         self.document["body"] = []

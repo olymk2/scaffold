@@ -74,7 +74,8 @@ class feed_reader:
                     response.raw.read = functools.partial(response.raw.read, decode_content=True)
                 try:
                     self.feed = lxml.etree.parse(response.raw, self.xml_parser)
-                except:
+                except Exception as e:
+                    print(e)
                     continue
             else:
                 with open(os.path.abspath(feed_info.get('url')), 'r') as file_stream:

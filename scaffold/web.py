@@ -21,7 +21,7 @@ class webpage(object):
     #0 = no cache loaded so we will need to create for next time
     cache = 1
     cache_loaded = 0
-    cache_path = '/cache/'
+    cache_path = '/tmp/cache/scaffold/'
     cache_file = None
 
     render_encodeing = 'utf-8'
