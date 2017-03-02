@@ -1,7 +1,7 @@
 import os
 import lxml
 import pytz
-from io import StringIO
+from io import StringIO, BytesIO
 import datetime
 import requests
 import functools
@@ -93,7 +93,7 @@ class feed_reader:
     def convert_rfc822_to_datetime(self, rfcdate):
         """rss uses rfc822 dates so lets convert them to datetime for use later"""
         if len(rfcdate):
-            parsed_rfcdate = parsedate_tz(rfcdate)
+            parsed_rfcdate = parsedate_tz(str(rfcdate))
             if not parsed_rfcdate:
                 return None
             return datetime.datetime.fromtimestamp(
@@ -108,9 +108,9 @@ class feed_reader:
 
         # parse large text seperately
         if len(text) > 600:
-            description = lxml.etree.parse(StringIO.StringIO(cleaned_html), self.html_parser)
+            description = lxml.etree.parse(BytesIO(cleaned_html), self.html_parser)
             root = description.getroot()
-            build = ''
+            build = BytesIO()
             for node in root[-1][-1].iter():
                 #skip any nodes with no text
                 if node.text is None and node.tail is None:
@@ -121,14 +121,15 @@ class feed_reader:
                     return build
                 else: 
                     if node.tag == 'a' and node.text is None:
-                        build += node.tail
+                        build.write(node.tail)
                     else:
-                        build += etree.tostring(node)
+                        a = etree.tostring(node)
+                        build.write(etree.tostring(node))
 
         return self.html_cleaner.clean_html(text)
 
     def fetch_image_from_node_text(self, text):
-        description = lxml.etree.parse(StringIO(text), self.html_parser)
+        description = lxml.etree.parse(BytesIO(text), self.html_parser)
         for image in description.xpath('.//img'):
             return image.get('src')
         return None
@@ -137,7 +138,7 @@ class feed_reader:
         """Try and get an image from an item in the feed, use various fall back methods"""
         image = node.xpath('media:thumbnail', namespaces=namespaces)
         if image:
-            return image[0].get('url', '')
+            return image[0].get('url', u'')
 
         # no media:thumbnail so lets try and grab an image from content:encoded
         image = node.xpath('content:encoded', namespaces=namespaces)
@@ -157,7 +158,7 @@ class feed_reader:
         return self.channel_image
 
 
-    def fetch_node_text(self, node, name, default=''):
+    def fetch_node_text(self, node, name, default=u''):
         """fetch the text from the node we are given, we are working in unicode
         so decode byte strings to unicode""" 
         result = node.xpath('./%s' % name)
@@ -165,7 +166,7 @@ class feed_reader:
             return default
 
         if type(result[-1].text) is str:
-            return result[-1].text
+            return result[-1].text.encode('utf-8')
         else:
             return result[-1].text
 
