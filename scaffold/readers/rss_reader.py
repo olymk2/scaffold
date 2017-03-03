@@ -143,7 +143,7 @@ class feed_reader:
         # no media:thumbnail so lets try and grab an image from content:encoded
         image = node.xpath('content:encoded', namespaces=namespaces)
         if image:
-            image = self.fetch_image_from_node_text(image[0].text)
+            image = self.fetch_image_from_node_text(image[0].text.encode('utf8'))
             if image:
                 return image
 
