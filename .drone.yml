@@ -4,20 +4,10 @@ workspace:
 
 pipeline:
   tests:
-    image: olymk2/scaffold
-    pull: true
+    image: python:3.5
+    environment:
+      - PYTHONUSERBASE=/drone/src/cache/packages
     commands:
-      - python3 -m pytest
-
-# services:
-#     mariadb:
-#       container_name: database
-#       image: olymk2/mariadb
-#       pull: true
-#       environment:
-#           # - MYSQL_BULK=test_runner|test_runner|test_runner|test_runner
-#           - MYSQL_USER=test_runner
-#           - MYSQL_PASSWORD=test_runner
-#           - MYSQL_DATABASE=test_runner
-#           - MYSQL_ROOT_PASSWORD=test_runner
+      - pip install --cache-dir /drone/src/cache/pip -r /drone/src/requirements.txt
+      - pytest
 

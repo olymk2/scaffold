@@ -1,8 +1,15 @@
 #core
 pillow
+lxml
+#MySQL-python
+pymysql
+pytz
+configparser
+requests
 
 #usefull features
 cssmin
+misaka
 ply==3.4
 slimit
 pytest
