@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Maidstone Hackspace Blog</title><link>http://maidstone-hackspace.org.uk/blog/</link><description>The latest blog posts and news from the Maidstone Hackspace site</description><atom:link rel="self" href="http://maidstone-hackspace.org.uk/blog/rss/"></atom:link><language>en-us</language><lastBuildDate>Sun, 26 Feb 2017 11:47:47 +0000</lastBuildDate><item><title>Robot coming together</title><link>http://maidstone-hackspace.org.uk/blog/robot-coming-together/</link><description>test description
+
+Stuff goes here.
+
+**listen**</description><pubDate>Sun, 26 Feb 2017 11:47:47 +0000</pubDate><guid>http://maidstone-hackspace.org.uk/blog/robot-coming-together/</guid><category>PI Wars 2017</category><media:thumbnail height="450" url="/media/post/robot-coming-together.full.jpg" width="825"></media:thumbnail></item></channel></rss>

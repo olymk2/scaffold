@@ -64,7 +64,7 @@ class feed_reader:
                 feed_info['id'] = pos
             self.url = feed_info.get('url')
             self.author = feed_info.get('author')
-            self.tags = feed_info.get('tags')
+            self.tags = feed_info.get('tags', None)
             if feed_info.get('url').startswith(('http:', 'https:')):
                 try:
                     response = requests.get(feed_info.get('url'), stream=True, timeout=timeout)
@@ -170,7 +170,6 @@ class feed_reader:
         else:
             return result[-1].text
 
-
     def fetch_node_attribute(self, node, name, attribs, default):
         result = node.xpath('./%s' % name)
         if result:
@@ -210,7 +209,6 @@ class feed_reader:
             if self.filter_by_date(date) and self.filter_by_tags(item):
                 author = self.format_author(self.fetch_node_text(item, 'author', self.author))
                 self.results.setdefault(author, []).append({
-                #~ self.results.append({
                     'id': feed.get('id', 1),
                     'title': self.fetch_node_text(item, 'title'),
                     'date': date,

@@ -15,6 +15,9 @@ rss_feeds = [{
         'url': './tests/test_data/rss_feed_digitaloctave.rss'
     }, {
         'author':'Author 02', 'tags': ['tech'], 
+        'url': './tests/test_data/rss_feed_test_media_thumbs.rss'
+    }, {
+        'author':'Author 02', 'tags': ['tech'], 
         'url': './tests/test_data/rss_feed_xkcd.rss'
     }, {
         'author':'Author 03', 
@@ -29,13 +32,26 @@ rss_feeds = [{
 
 
 class TestBasePage(unittest.TestCase):
-    def setUp(self):
-        self.feeds = feed_reader(rss_feeds)
+    # def setUp(self):
+    #     self.feeds = feed_reader(rss_feeds)
 
     def test_rss_reader(self):
+        self.feeds = feed_reader(rss_feeds)
         for row in self.feeds:
             self.assertNotEqual('', row.get('author'))
             self.assertNotEqual('', row.get('id'))
+
+    def test_image_via_media_attribute(self):
+        self.feeds = feed_reader([{
+            'author':'Author 02',
+            'url': './tests/test_data/rss_feed_test_media_thumbs.rss'
+        }])
+        for row in self.feeds:
+            self.assertNotEqual('', row.get('author'))
+            self.assertNotEqual('', row.get('id'))
+            self.assertEquals('/media/post/robot-coming-together.full.jpg', row.get('image'))
+
+
 
 
 if __name__ == '__main__':
