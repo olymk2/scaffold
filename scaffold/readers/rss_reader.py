@@ -40,6 +40,7 @@ class feed_reader:
     """parse a list of feeds and return details as dictionary data"""
     #create the html cleaner, this is to clean out unwanted html tags in the description text
     #page_structure=True,remove_unknown_tags=True
+    headers = {'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'}
     html_cleaner = Cleaner()
     html_cleaner.javascript = True 
     html_cleaner.style = True
@@ -67,7 +68,7 @@ class feed_reader:
             self.tags = feed_info.get('tags', None)
             if feed_info.get('url').startswith(('http:', 'https:')):
                 try:
-                    response = requests.get(feed_info.get('url'), stream=True, timeout=timeout)
+                    response = requests.get(feed_info.get('url'), stream=True, timeout=timeout, headers=self.headers)
                 except (requests.exceptions.Timeout, Exception) as e:
                     continue
                 if response.headers.get('content-encoding') == 'gzip':
