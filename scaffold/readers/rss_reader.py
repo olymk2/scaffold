@@ -40,7 +40,7 @@ class feed_reader:
     """parse a list of feeds and return details as dictionary data"""
     #create the html cleaner, this is to clean out unwanted html tags in the description text
     #page_structure=True,remove_unknown_tags=True
-    headers = {'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'}
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'}
     html_cleaner = Cleaner()
     html_cleaner.javascript = True 
     html_cleaner.style = True
